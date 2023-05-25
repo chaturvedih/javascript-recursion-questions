@@ -1,7 +1,7 @@
 //Question 7: Given a multi-dimensional integer array, return the total number of integers stored inside this array
 
 const arr = [[[5], 3], 0, 2, ['foo'], [], [4, [5, 6]]]
-let count = 0
+// let count = 0
 
 // By using recurssion with for loop
 
@@ -16,17 +16,20 @@ let count = 0
 
 // By using recurssion only
 function multidimensionalArray(arr){
-  if(arr.length>0){
-    const num = arr.shift()
-    if(num.length>0 && Array.isArray(num)){
-      multidimensionalArray(num)
-    }
-    multidimensionalArray(arr)
-    if(typeof num === 'number') {
-      count++
-    }
-  }
-}
+  let count = 0
+  if(arr.length === 0) return 0
+  const num = arr.shift()
 
-multidimensionalArray(arr)
-console.log('count', count)
+  if(num.length>0 && Array.isArray(num)){
+    count += multidimensionalArray(num)
+  }
+  else if(typeof num === 'number') {
+    count += 1
+  }
+
+  return count + multidimensionalArray(arr)
+
+  }
+
+
+console.log(multidimensionalArray(arr))
