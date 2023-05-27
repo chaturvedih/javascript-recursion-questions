@@ -16,10 +16,13 @@ let nestedObject = {
 }
 
 function contains(nestedObject, val){
-  Object.keys(nestedObject).forEach(elem =>{
-    if(typeof nestedObject[elem] === 'object'){
-      return  contains(nestedObject[elem], val)
+  for(const value of Object.values(nestedObject)){
+    if(typeof value === 'object'){
+      return contains(value, val)
     }
-    return nestedObject[elem] === val
-  })
+
+    return value === val
+  }
 }
+
+console.log(contains(nestedObject,44))
